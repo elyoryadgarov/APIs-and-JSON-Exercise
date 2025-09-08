@@ -6,26 +6,18 @@ namespace APIsAndJSON
     {
         static void Main(string[] args)
         {
-            var client = new HttpClient();
-            string ronURL = "https://ron-swanson-quotes.herokuapp.com/v2/quotes";
-
+        RonVSKanyeAPI api = new RonVSKanyeAPI();
             for (int i = 0; i < 5; i++)
             {
-                var ronResponse = client.GetStringAsync(ronURL).Result;
-                var ronQuote = JsonArray.Parse(ronResponse).ToString().Replace('[',' ').Replace(']',' ').Trim();
-                Console.WriteLine($"Ron: {ronQuote}");   
+                Console.WriteLine($"Ron: {api.Quote("https://ron-swanson-quotes.herokuapp.com/v2/quotes")}");
             }
-            
-            string kanyeURL = "https://api.kanye.rest";
-
+            Console.WriteLine("\nNow Kanye's Turn\n");
             for (int i = 0; i < 5; i++)
             {
-                var kanyeResponse = client.GetStringAsync(kanyeURL).Result;
-                var kanyeQuote = JsonArray.Parse(kanyeResponse).ToString().Replace('{',' ').Replace('}',' ').Replace("\"quote\":","").Trim();
-                
-                Console.WriteLine($"Kanye: {kanyeQuote}"); 
+                Console.WriteLine($"Kanye: {api.Quote("https://api.kanye.rest")}");
             }
             
+           
         }
     }
 }
